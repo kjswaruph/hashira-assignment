@@ -9,8 +9,12 @@ public class RootValue {
         this.baseValue = baseValue;
     }
 
+    java.math.BigInteger getDecodedBig() {
+        return new java.math.BigInteger(baseValue, base);
+    }
+
     double getDecodedY() {
-        // Use BigInteger to safely parse large numbers then convert to double (may lose precision for extremely large values)
-        return new java.math.BigInteger(baseValue, base).doubleValue();
+        // Retained for backward compatibility (quadratic case); may lose precision for large values
+        return getDecodedBig().doubleValue();
     }
 }
